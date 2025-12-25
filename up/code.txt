@@ -1,0 +1,103 @@
+#include "asr.h"
+extern "C"{ void * __dso_handle = 0 ;}
+#include "setup.h"
+#include "HardwareSerial.h"
+
+uint32_t snid;
+void ASR_CODE();
+
+//{speak:云儿-温柔女声,vol:2,speed:10,platform:haohaodada,version:V3}
+//{playid:10001,voice:欢迎使用智能垃圾桶，用垃圾桶唤醒我。}
+//{playid:10002,voice:我退下了，用垃圾桶唤醒我}
+
+/*描述该功能...
+*/
+void ASR_CODE(){
+  if(((snid) > 1) && ((snid) <= 18)){
+    Serial.print('1');
+  }
+  if(((snid) > 18) && ((snid) <= 36)){
+    Serial.print('2');
+  }
+  if(((snid) > 36) && ((snid) <= 52)){
+    Serial.print('3');
+  }
+  if(((snid) > 52) && ((snid) <= 63)){
+    Serial.print('4');
+  }
+  if((snid) == 64){
+    Serial.print('5');
+  }
+
+}
+
+void setup()
+{
+  setPinFun(13,SECOND_FUNCTION);
+  setPinFun(14,SECOND_FUNCTION);
+  Serial.begin(9600);
+  //{ID:1,keyword:"唤醒词",ASR:"垃圾桶",ASRTO:"我在"}
+  //{ID:2,keyword:"命令词",ASR:"包",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:3,keyword:"命令词",ASR:"玩偶",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:4,keyword:"命令词",ASR:"铁锅",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:5,keyword:"命令词",ASR:"衣服",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:6,keyword:"命令词",ASR:"家电",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:7,keyword:"命令词",ASR:"报纸",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:8,keyword:"命令词",ASR:"纸箱",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:9,keyword:"命令词",ASR:"书本",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:10,keyword:"命令词",ASR:"期刊",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:11,keyword:"命令词",ASR:"油桶",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:12,keyword:"命令词",ASR:"酒瓶",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:13,keyword:"命令词",ASR:"广告单",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:14,keyword:"命令词",ASR:"塑料瓶",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:15,keyword:"命令词",ASR:"玻璃杯",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:16,keyword:"命令词",ASR:"易拉罐",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:17,keyword:"命令词",ASR:"数码产品",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:18,keyword:"命令词",ASR:"塑料玩具",ASRTO:"可回收，马上打开垃圾桶"}
+  //{ID:19,keyword:"命令词",ASR:"药品",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:20,keyword:"命令词",ASR:"油漆",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:21,keyword:"命令词",ASR:"胶片",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:22,keyword:"命令词",ASR:"相纸",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:23,keyword:"命令词",ASR:"溶剂",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:24,keyword:"命令词",ASR:"杀虫剂",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:25,keyword:"命令词",ASR:"消毒剂",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:26,keyword:"命令词",ASR:"节能灯",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:27,keyword:"命令词",ASR:"温度计",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:28,keyword:"命令词",ASR:"血压计",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:29,keyword:"命令词",ASR:"日光灯管",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:30,keyword:"命令词",ASR:"铅蓄电池",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:31,keyword:"命令词",ASR:"镉镍电池",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:32,keyword:"命令词",ASR:"废扣式电池",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:33,keyword:"命令词",ASR:"氧化汞电池",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:34,keyword:"命令词",ASR:"药品包装物",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:35,keyword:"命令词",ASR:"溶剂包装物",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:36,keyword:"命令词",ASR:"消毒剂包装物",ASRTO:"有害，马上打开垃圾桶"}
+  //{ID:37,keyword:"命令词",ASR:"豆",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:38,keyword:"命令词",ASR:"鱼",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:39,keyword:"命令词",ASR:"茶渣",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:40,keyword:"命令词",ASR:"菜叶",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:41,keyword:"命令词",ASR:"剩饭",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:42,keyword:"命令词",ASR:"剩菜",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:43,keyword:"命令词",ASR:"面包",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:44,keyword:"命令词",ASR:"鸡肉",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:45,keyword:"命令词",ASR:"蔬菜",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:46,keyword:"命令词",ASR:"蛋糕",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:47,keyword:"命令词",ASR:"饼干",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:48,keyword:"命令词",ASR:"苹果核",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:49,keyword:"命令词",ASR:"鸡蛋壳",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:50,keyword:"命令词",ASR:"动物内脏",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:51,keyword:"命令词",ASR:"中药药渣",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:52,keyword:"命令词",ASR:"宠物饲料",ASRTO:"厨余，马上打开垃圾桶"}
+  //{ID:53,keyword:"命令词",ASR:"烟蒂",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:54,keyword:"命令词",ASR:"砖瓦",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:55,keyword:"命令词",ASR:"陶瓷",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:56,keyword:"命令词",ASR:"餐巾纸",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:57,keyword:"命令词",ASR:"湿巾纸",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:58,keyword:"命令词",ASR:"纸尿裤",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:100,keyword:"命令词",ASR:"塑料袋",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:60,keyword:"命令词",ASR:"食品包装",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:61,keyword:"命令词",ASR:"清扫渣土",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:62,keyword:"命令词",ASR:"一次性餐盒",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:63,keyword:"命令词",ASR:"卫生间用纸",ASRTO:"其他，马上打开垃圾桶"}
+  //{ID:64,keyword:"命令词",ASR:"关闭",ASRTO:"好的，马上关闭垃圾桶"}
+}
